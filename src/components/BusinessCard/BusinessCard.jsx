@@ -300,9 +300,9 @@ const BusinessCard = ({ card }) => {
               </h3>
               <p className="text-gray-600 mb-6">{card.company}</p>
               <div className="bg-white p-4 rounded-2xl shadow-inner mb-6">
-                {card.qrCodeUrl ? (
+                {card.qrCode ? (
                   <img
-                    src={card.qrCodeUrl}
+                    src={card.qrCode}
                     alt="QR Code"
                     className="w-48 h-48 mx-auto"
                   />
