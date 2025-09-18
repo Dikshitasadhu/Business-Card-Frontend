@@ -1,11 +1,14 @@
-import React from "react";
+import { Toaster } from "react-hot-toast";
+import router from "./routes/routes";
+import { RouterProvider } from "react-router-dom";
 
-export default function App() {
+function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-4xl font-bold text-blue-600">
-        Hello, this is Tailwind CSS working in React!
-      </h1>
-    </div>
+    <>
+      <RouterProvider router={router} />
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   );
 }
+
+export default App;
