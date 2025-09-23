@@ -26,24 +26,40 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Submitting registration form data:", form);
+  e.preventDefault();
 
-    if (form.password !== form.confirmPassword) {
-      toast.error("Passwords do not match");
+  if (form.password !== form.confirmPassword) {
+    toast.error("Passwords do not match");
+    return;
+  }
+
+  const result = await dispatch(register(form));
+
+  if (result.payload) {
+    // Backend indicates OTP needs to be verified (message includes 'verify your email')
+    if (result.payload.success === true
+      && result.payload.message.toLowerCase().includes('verify your email')) {
+      toast.success(result.payload.message);
+      navigate('/verify-otp', { state: { email: form.email } });
       return;
     }
 
-    // Send the full form including confirmPassword
-    const result = await dispatch(register(form));
-
-    if (register.fulfilled.match(result)) {
-      toast.success("Registration successful! Please login.");
-      navigate("/login");
-    } else {
-      toast.error(result.payload?.error || error || "Registration failed");
+    // Normal success with no need for OTP (unlikely in your case)
+    if (result.payload.success === true) {
+      toast.success(result.payload.message || "Registration successful! Please login.");
+      navigate('/login');
+      return;
     }
-  };
+  }
+
+  // Fallback error showing
+  if (result.error || result.payload?.error) {
+    toast.error(result.error || result.payload?.error);
+  } else {
+    toast.error('Registration failed.');
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-100 via-pink-100 to-yellow-100 p-4">

@@ -2,6 +2,7 @@ const AUTH_ENDPOINTS = {
   REGISTER: "/auth/register",
   LOGIN: "/auth/login",
   REFRESH_TOKEN: "/auth/refresh-token",
+  VERIFY_OTP: "/auth/verify-otp",
   LOGOUT: "/auth/logout",
 };
 

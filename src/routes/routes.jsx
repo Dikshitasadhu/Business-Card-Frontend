@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import MyCardsPage from '../pages/MyCardsPage';
 import CardDelete from '../pages/CardDelete';
+import VerifyOtp from '../pages/VerifyOtp';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/login', element: <Login /> },
       { path: '/register', element: <Register /> },
+      { path: 'verify-otp', element: <VerifyOtp /> },
     ],
   },
   {
